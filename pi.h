@@ -38,7 +38,10 @@ constexpr T pi() {
 #else 
 
 // recursive version 
+
+// 4MB stack required for cpp_bin_float_250 - larger values would need more stack, iterative method is better
 #pragma comment(linker, "/STACK:4194304") // 4MB Stack needed instead of default 1MB
+
 template<typename T>
 constexpr T pi(const T numerator = 1, const T denominator1 = 2, const T denominator2 = 3, const T denominator3 = 8, const T nextNumeratorFactor = 1, const T nextDenominatorFactor1 = 2, const T antecedentPi = (T)3)
 {
@@ -52,7 +55,7 @@ constexpr T pi(const T numerator = 1, const T denominator1 = 2, const T denomina
 	return pi(
 		// odd semifactorial
 		numerator * theNextNumeratorFactor, 
-		// eben semifactorial
+		// even semifactorial
 		denominator1 * theNextDenominatorFactor1, 
 		denominator2 + 2, // odd numbers
 		denominator3 * 4, // odd powers of 2
