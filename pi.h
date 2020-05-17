@@ -38,7 +38,7 @@ constexpr T pi() {
 #else 
 
 // recursive version 
-#pragma comment(linker, "/STACK:2097152") // 2MB Stack needed instead of default 1MB
+#pragma comment(linker, "/STACK:4194304") // 4MB Stack needed instead of default 1MB
 template<typename T>
 constexpr T pi(const T numerator = 1, const T denominator1 = 2, const T denominator2 = 3, const T denominator3 = 8, const T nextNumeratorFactor = 1, const T nextDenominatorFactor1 = 2, const T antecedentPi = (T)3)
 {
