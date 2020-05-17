@@ -1,6 +1,6 @@
 ## Fun with pi
 
-Calculating $\pi$ using templates with an infinite arctan series.
+Calculating &pi; using templates with an infinite arctan series.
 
 ### Building
 
