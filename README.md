@@ -11,6 +11,8 @@ https://www.boost.org/
 
 You can install it using **vcpkg**
 
+https://github.com/Microsoft/vcpkg
+
 #### Mac/Linux
 requires cmake
 
@@ -26,8 +28,6 @@ make
 
 #### Windows
 made with VS 2019 on windows 
-
-https://github.com/Microsoft/vcpkg
 
 Using *vcpkg* to install boost and *NuGet* to link to *vcpkg* installs
 
