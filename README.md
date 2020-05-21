@@ -4,14 +4,28 @@ Calculating &pi; using templates with an infinite arctan series.
 
 ### Building
 
-made with VS 2019 on windows 
-
 you will need **boost** installed:
 
 You can read up on it here:
 https://www.boost.org/
 
 You can install it using **vcpkg**
+
+#### Mac/Linux
+requires cmake
+
+These 2 packages are needed:
+* `vcpkg install boost-multiprecision`
+* `vcpkg install boost-math`
+
+then
+```
+cmake
+make
+```
+
+#### Windows
+made with VS 2019 on windows 
 
 https://github.com/Microsoft/vcpkg
 
@@ -21,7 +35,7 @@ These 2 packages are needed:
 * `vcpkg install boost-multiprecision:x64-windows`
 * `vcpkg install boost-math:x64-windows`
 
-Sample output: 
+####Sample output: 
 ```
 PI:
 
