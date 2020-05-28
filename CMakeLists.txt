@@ -5,11 +5,12 @@ if(NOT DEFINED ENV{VCPKG_ROOT})
     message(FATAL_ERROR "please set up VCPKG_ROOT=path/to/vcpkg")
 endif()
 
-
 #=== strongly recommend an out of source cmake build
-set(DEFAULT_OUT_OF_SOURCE_FOLDER "build")
+if(NOT DEFINED DEFAULT_OUT_OF_SOURCE_FOLDER)
+    set(DEFAULT_OUT_OF_SOURCE_FOLDER "build")
+endif()
 
-if (${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
+if(${CMAKE_SOURCE_DIR} STREQUAL ${CMAKE_BINARY_DIR})
     if (NOT EXISTS ${DEFAULT_OUT_OF_SOURCE_FOLDER})
         file(MAKE_DIRECTORY ${DEFAULT_OUT_OF_SOURCE_FOLDER})
     endif()
