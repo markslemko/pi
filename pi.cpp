@@ -1,7 +1,7 @@
 #include <iostream>
 #include <chrono>
 #include <boost/multiprecision/cpp_bin_float.hpp>
-#define PI_ITERATIVE
+
 #include "pi.h"
 
 namespace boost {

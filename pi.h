@@ -4,6 +4,10 @@
  * arctan(1/2) * 6 => pi
  */
 
+//#define PI_ITERATIVE
+//#define FULL_PARAMETER_RECURSION
+//#define MINIMAL_PARAMETER_RECURSION
+
 #ifdef PI_ITERATIVE
 
 // iterative version
@@ -35,13 +39,11 @@ constexpr T pi() {
 	return pi;
 }
 
-#else 
+#elif defined(FULL_PARAMETER_RECURSION)
 
 // recursive version 
 
-// 4MB stack required for cpp_bin_float_250 - larger values would need more stack, iterative method is better
-#pragma comment(linker, "/STACK:4194304") // 4MB Stack needed instead of default 1MB
-
+// 4MB stack required for cpp_bin_float_250 - larger values would need more stack, iterative method is obviously better with memory
 template<typename T>
 constexpr T pi(const T numerator = 1, const T denominator1 = 2, const T denominator2 = 3, const T denominator3 = 8, const T nextNumeratorFactor = 1, const T nextDenominatorFactor1 = 2, const T antecedentPi = (T)3)
 {
@@ -64,5 +66,58 @@ constexpr T pi(const T numerator = 1, const T denominator1 = 2, const T denomina
 		theNextDenominatorFactor1, 
 		newPi);
 }
+#else 
+
+// recursive minimal parameter version
+
+// represent n!! 
+template<typename T>
+constexpr T doubleFactorial(const T num)
+{
+	if (num > 1) {
+		return num * doubleFactorial(num - 2);
+	} else {
+		return 1;
+	}
+}
+
+// simplistic - positive powers only ( > 0 )
+template<typename T>
+constexpr T pow2(const T exponent)
+{
+	if (exponent > 1) {
+		return 2 * pow2(exponent - 1);
+	}
+	else {
+		return 2;
+	}
+}
+
+
+template<typename T>
+constexpr T pi(const T iteration = 0, const T antecedentPi = (T)3)
+{
+	// calculate the iteration's simple Factors
+	const T nextNumeratorFactor = (iteration) * 2 + 1;
+	const T nextDenominatorFactor1 = (iteration) * 2 + 2;
+	const T denominator2 = iteration * 2 + 3;
+
+	// fully calculate iteration's function Factors
+	const T numerator = doubleFactorial<T>(nextNumeratorFactor);
+	const T denominator1 = doubleFactorial<T>(nextDenominatorFactor1);
+	const T denominator3 = pow2(denominator2);
+
+	// pi increment at iteration
+	const T newPi = antecedentPi + (6 * numerator) / (denominator1 * denominator2 * denominator3);
+
+	if (newPi == antecedentPi) {
+		// we can refine no further
+		return antecedentPi;
+	}
+	return pi(
+		iteration + 1,
+		newPi);
+}
+
 
 #endif
